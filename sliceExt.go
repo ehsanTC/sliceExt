@@ -1,5 +1,7 @@
 package sliceExt
 
+var ERR_OutOfIndex string = "The inserting index is out of range!"
+
 func Contains[T comparable](slice []T, item T) bool {
 	for i := 0; i < len(slice); i++ {
 		if item == slice[i] {
@@ -45,7 +47,7 @@ func Insert[T any](slice *[]T, index int, item T) {
 
 func InsertRange[T any](slice *[]T, index int, collection []T) {
 	if index >= len(*slice) {
-		panic("The inserting index is out of range!")
+		panic(ERR_OutOfIndex)
 	}
 
 	if freeSpace := cap(*slice) - len(*slice); len(collection) > freeSpace {
