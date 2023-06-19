@@ -2,6 +2,12 @@ package sliceExt
 
 import "testing"
 
+func CatchPanic(t *testing.T) {
+	if r := recover(); r == nil {
+		t.Errorf("The code did not get the panic")
+	}
+}
+
 func TestContains(t *testing.T) {
 	slice := []int{1}
 
@@ -125,6 +131,20 @@ func TestRemoveRange(t *testing.T) {
 	}
 }
 
+func TestRemoveRangeIndexPanic(t *testing.T) {
+	defer CatchPanic(t)
+
+	names := []string{"Ehsan", "Toghian"}
+	RemoveRange(&names, 2, 1)
+}
+
+func TestRemoveRangeLEngthPanic(t *testing.T) {
+	defer CatchPanic(t)
+
+	names := []string{"Ehsan", "Toghian"}
+	RemoveRange(&names, 0, 3)
+}
+
 func TestInsert(t *testing.T) {
 	numbers := new([3]int)[0:2]
 	Insert(&numbers, 1, 100)
@@ -158,11 +178,7 @@ func TestInsertRange(t *testing.T) {
 }
 
 func TestInsertRangePanic(t *testing.T) {
-	defer func() {
-		if r := recover(); r == nil {
-			t.Errorf("The code did not get the panic")
-		}
-	}()
+	defer CatchPanic(t)
 
 	numbers := new([3]int)[0:2]
 	Insert(&numbers, 3, 100)
