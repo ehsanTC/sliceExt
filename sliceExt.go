@@ -1,6 +1,6 @@
 package sliceExt
 
-var ERR_OutOfIndex string = "The inserting index is out of range!"
+var ERR_OutOfIndex string = "The index is out of range!"
 
 func Contains[T comparable](slice []T, item T) bool {
 	for i := 0; i < len(slice); i++ {
