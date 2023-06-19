@@ -38,6 +38,14 @@ func RemoveAt[T any](slice *[]T, index int) {
 }
 
 func RemoveRange[T any](slice *[]T, index int, count int) {
+	if index < 0 || index >= len(*slice) {
+		panic(ERR_OutOfIndex)
+	}
+
+	if index+count > len(*slice) {
+		panic(ERR_OutOfIndex)
+	}
+
 	*slice = append((*slice)[:index], (*slice)[index+count:]...)
 }
 
