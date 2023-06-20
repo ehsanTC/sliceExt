@@ -58,7 +58,7 @@ func Insert[T any](slice *[]T, index int, item T) {
 }
 
 func InsertRange[T any](slice *[]T, index int, collection []T) {
-	if index >= len(*slice) {
+	if index < 0 || index >= len(*slice) {
 		panic(ERR_OutOfIndex)
 	}
 
