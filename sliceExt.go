@@ -34,6 +34,10 @@ func Remove[T comparable](slice *[]T, item T) {
 }
 
 func RemoveAt[T any](slice *[]T, index int) {
+	if index < 0 || index >= len(*slice) {
+		panic(ERR_OutOfIndex)
+	}
+
 	*slice = append((*slice)[:index], (*slice)[index+1:]...)
 }
 

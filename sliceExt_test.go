@@ -105,6 +105,14 @@ func TestRemoveAt(t *testing.T) {
 	}
 }
 
+func TestRemoveAtPanic(t *testing.T) {
+	defer CatchPanic(t)
+
+	slice := []int{1}
+	RemoveAt(&slice, 2)
+	RemoveAt(&slice, -1)
+}
+
 func TestRemoveRange(t *testing.T) {
 	slice := make([]int, 10)
 	for i := 0; i < 10; i++ {
